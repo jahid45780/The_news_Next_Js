@@ -22,7 +22,6 @@ const Header = () => {
   onFocus={replay} 
 />
                  </Typography>
-
          <Typography className=" text-center text-2xl mt-1 text-sky-600" >
             {currentDate}
          </Typography>

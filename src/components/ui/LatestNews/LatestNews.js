@@ -5,7 +5,10 @@ import Pakistan from '@/assets/11.webp'
 import france from '@/assets/france-abortion-bill.webp'
 import Getty from '@/assets/GettyImages.webp'
 import Gaza from '@/assets/highres.webp'
-const LatestNews = () => {
+import { getAllNews } from "@/utils/getAllNews";
+const LatestNews = async () => {
+  const {data} =  await getAllNews()
+  // console.log(data);
     return (
         <>
           <Box className=" mt-5" >
@@ -13,23 +16,24 @@ const LatestNews = () => {
           <Card>
       <CardActionArea>
         <CardMedia>
-          <Image src={Bit} alt="bit" width='full' height={500} ></Image>
+          <Image className=" w-full" src={data[0].thumbnail_url} alt="bit" width={500} height={500} ></Image>
         </CardMedia>
         <CardContent>
 
-        <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > Technology </span>
+        <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > {data[0].category} </span>
 
           <Typography className=" mt-1" gutterBottom variant="h5" component="div">
-          Unlocking the Power of Bitcoin: A Comprehensive Overview
+           {data[0].title}
           </Typography>
             
           <Typography className=" font-bold" >
-            By Jahid Hossain Mar 15-3-2024
+            {data[0].author.name} {data[0].author.published_date} 
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-          Certainly! If youre looking to write an article about Bitcoin, you might want to consider
-          This title suggests that the article will delve into the world of Bitcoin
+                
+          {data[0].details.length>200? data[0].details.slice(0,200)+ '...':data[0].details}
+
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -37,120 +41,40 @@ const LatestNews = () => {
 
     <Grid className=" mt-2" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
       {/* card 1 */}
-  <Grid item xs={6}>
+  
+  {
+    data.slice(0,8).map((news)=>(
+      <Grid key={news.id} item xs={6}>
       
   <CardActionArea>
         <CardMedia>
-          <Image src={Pakistan} alt="news" width='full' height={500} ></Image>
+          <Image className=" h-80" src={news.thumbnail_url} alt="news" width={500} height={500} ></Image>
         </CardMedia>
         <CardContent>
 
-        <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > Political </span>
+        <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > {news.category} </span>
 
           <Typography className=" mt-1" gutterBottom variant="h5" component="div">
-          Shehbaz Sharif takes oath as 24th prime minister
+          {news.title.length>18? news.title.slice(0,18)+ '...':title.details}
           </Typography>
-            
+             
           <Typography className=" font-bold" >
-            By Jahid Hossain Mar 15-3-2024
+          {news.author.published_date}
           </Typography>
 
           <Typography variant="body2" color="text.secondary">
-          Certainly! If youre looking to write an article about Bitcoin, you might want to consider
-          This title suggests that the article will delve into the world of Bitcoin
+              
+                {news.details.length>200? news.details.slice(0,200)+ '...':news.details}
+            
           </Typography>
         </CardContent>
       </CardActionArea>
 
 
   </Grid>
- 
- {/* card 2 */}
-  <Grid item xs={6}>
-    
-  <CardActionArea>
-        <CardMedia>
-          <Image className=" h-[215px]" src={france} alt="news" width='full' height={500} ></Image>
-        </CardMedia>
-        <CardContent>
-
-        <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > Voting</span>
-
-          <Typography className=" mt-1" gutterBottom variant="h5" component="div">
-          France Is Voting to Enshrine Abortion Rights
-          </Typography>
-            
-          <Typography className=" font-bold" >
-            By Jahid Hossain Mar 15-3-2024
-          </Typography>
-
-          <Typography variant="body2" color="text.secondary">
-          Certainly! If youre looking to write an article about Bitcoin, you might want to consider
-          This title suggests that the article will delve into the world of Bitcoin
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-
-  </Grid>
-
-  {/* card 3 */}
-  <Grid className=" mt-2" item xs={6}>
-    
-    <CardActionArea>
-          <CardMedia>
-            <Image src={Getty} alt="bit" width='full' height={500} ></Image>
-          </CardMedia>
-          <CardContent>
-  
-          <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > Political </span>
-  
-            <Typography className=" mt-1" gutterBottom variant="h5" component="div">
-            State of the Union Speech Will Serve as Crucial Test For Many Voters
-            </Typography>
-              
-            <Typography className=" font-bold" >
-              By Jahid Hossain Mar 15-3-2024
-            </Typography>
-  
-            <Typography variant="body2" color="text.secondary">
-            Certainly! If youre looking to write an article about Bitcoin, you might want to consider
-            This title suggests that the article will delve into the world of Bitcoin
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-  
-    </Grid>
-
- {/* card 4 */}
- <Grid className="mt-2" item xs={6}>
-    
-    <CardActionArea>
-          <CardMedia>
-            <Image src={Gaza} alt="bit" width='full' height={500} ></Image>
-          </CardMedia>
-          <CardContent>
-  
-          <span className=" text-2xl bg-red-500 font-semibold p-1 rounded-md px-2" > Ignite </span>
-  
-            <Typography className=" mt-1" gutterBottom variant="h5" component="div">
-            UN rights chief says ‘powder keg’ Gaza could ignite wider war
-            </Typography>
-              
-            <Typography className=" font-bold" >
-              By Jahid Hossain Mar 15-3-2024
-            </Typography>
-  
-            <Typography variant="body2" color="text.secondary">
-            Certainly! If youre looking to write an article about Bitcoin, you might want to consider
-            This title suggests that the article will delve into the world of Bitcoin
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-  
-    </Grid>
-
- 
-</Grid>
+    ))
+  }
+ </Grid>
 
 
             
